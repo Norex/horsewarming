@@ -1,8 +1,6 @@
-
-/*
- * GET home page.
- */
-
 exports.index = function(req, res){
-  res.render('index', { title: 'Express' });
+  console.log('yaaa');
+  var socketUrl = process.env.NODE_ENV ? process.env.SUBDOMAIN + '.nodejitsu.com' : 'http://localhost:' + (process.env.PORT || 3000);
+  console.log(socketUrl);
+  res.render('index', { socketUrl: socketUrl });
 };

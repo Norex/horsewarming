@@ -29,7 +29,7 @@ app.get('/', routes.index);
 app.post('/', function(req, res) {
   keyword = req.body.keyword;
   twitter.run(keyword, io);
-  res.render('index', { title: 'Express' });
+  res.render('index');
 });
 
 var server = http.createServer(app).listen(app.get('port'), function(){

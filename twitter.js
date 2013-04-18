@@ -6,10 +6,10 @@ nconf.argv()
      .file({ file: './config.json' });
 
 var twit = new Twit({
-    consumer_key: nconf.get('twitter_consumer_key'),
-    consumer_secret: nconf.get('twitter_consumer_secret'),
-    access_token: nconf.get('twitter_access_token'),
-    access_token_secret: nconf.get('twitter_access_token_secret')
+    consumer_key: nconf.get('TWITTER_CONSUMER_KEY'),
+    consumer_secret: nconf.get('TWITTER_CONSUMER_SECRET'),
+    access_token: nconf.get('TWITTER_ACCESS_TOKEN'),
+    access_token_secret: nconf.get('TWITTER_ACCESS_TOKEN_SECRET')
 });
 
 var tweetStream = false;

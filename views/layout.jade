@@ -1,7 +1,7 @@
 doctype 5
 html
   head
-    title= title
+    title Twitter Wars!
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
     link(rel='stylesheet', href='/stylesheets/bootstrap.css')
     link(rel='stylesheet', href='/stylesheets/bootstrap-responsive.css')
@@ -9,6 +9,15 @@ html
     script(type='text/javascript', src='//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js')
     script(type='text/javascript', src='/javascripts/socket.io.js')
     script(type='text/javascript', src='/javascripts/bootstrap.js')
-    script(type='text/javascript', src='/javascripts/script.js')
+    script(type='text/javascript')
+      (function($) {
+        $(document).ready(function() {
+          var socket = io.connect('!{socketUrl}');
+          socket.on('twitter', function(data) {
+            $('#tweets').prepend('<div class="row"><div class="span12"><blockquote class="tweet"><img src="' + data.user.profile_image_url + '"/><p>' + data.text + '</p><small>' + data.user.screen_name + '</small></p></blockquote></div></div>');
+            console.log(data);
+          });
+        });
+      })(jQuery);
   body
     block content
