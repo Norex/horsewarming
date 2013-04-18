@@ -2,7 +2,7 @@ var express = require('express')
   , routes = require('./routes')
   , http = require('http')
   , path = require('path')
-  , Twit = require('twit')
+  , twitter = require('./twitter')
   , socketIo = require('socket.io');
 
 var app = express();
@@ -25,36 +25,17 @@ if ('development' == app.get('env')) {
 
 app.get('/', routes.index);
 
+// When an act of war is sent.
+app.post('/', function(req, res) {
+  keyword = req.body.keyword;
+  twitter.run(keyword, io);
+  res.render('index', { title: 'Express' });
+});
+
 var server = http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
 
 var io = socketIo.listen(server);
 
-var twit = new Twit({
-    consumer_key: '', 
-    consumer_secret: '', 
-    access_token: '',
-    access_token_secret: ''
-})
-
-var tweetStream = twit.stream('statuses/filter', { track: 'cat' });
-tweetStream.on('tweet', function (tweet) {
-  io.sockets.emit('twitter', tweet);
-});
-
-tweetStream.on('limit', function (limitMessage) {
-  console.log('Limited by Twitter streaming API');
-})
-
-tweetStream.on('disconnect', function (disconnectMessage) {
-  console.log('Disconnected: ' + disconnectMessage);
-})
-
-tweetStream.on('connect', function (request) {
-  console.log('Connected to Twitter streaming API');
-})
-
-tweetStream.on('reconnect', function (request, response, connectInterval) {
-  console.log('Reconnected to Twitter streaming API');
-})
+twitter.run('cat', io);
