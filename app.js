@@ -23,13 +23,16 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-app.get('/', routes.index);
+app.get('/', function(req, res) {
+  req.currentKeyword = twitter.currentKeyword();
+  routes.index(req, res);
+});
 
 // When an act of war is sent.
 app.post('/', function(req, res) {
-  keyword = req.body.keyword;
-  twitter.run(keyword, io);
-  res.render('index');
+  twitter.run(req.body.keyword, io);
+  req.currentKeyword = twitter.currentKeyword();
+  routes.index(req, res);
 });
 
 var server = http.createServer(app).listen(app.get('port'), function(){
@@ -37,5 +40,3 @@ var server = http.createServer(app).listen(app.get('port'), function(){
 });
 
 var io = socketIo.listen(server);
-
-twitter.run('cat', io);

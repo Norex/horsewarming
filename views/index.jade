@@ -10,8 +10,16 @@ block content
 			div.span12
 				div.input-append
 					form(method="post", id="keyword-form")
-						input(type="text", name="keyword", placeholder="keyword")
-						button.btn.btn-primary(type="button") Primary
+						input(type="text", name="keyword", placeholder="keyword", id="keyword")
+						button.btn.btn-primary(type="submit") Attack!
+
+		div.row
+			div.span12
+				div#alert-box.alert.alert-info
+					if currentKeyword
+						h4 Now Streaming: #{currentKeyword}
+					else
+						h4 Nothing being streamed!
 
 		div.content
 			div#tweets
