@@ -12,11 +12,18 @@ var twit = new Twit({
     access_token_secret: nconf.get('TWITTER_ACCESS_TOKEN_SECRET')
 });
 
-var tweetStream = false;
+var tweetStream = false,
+		currentKeyword = false;
+
+
+module.exports.currentKeyword = currentKeyword;
 
 module.exports.run = function(keyword, io) {
 	if (tweetStream)
 		tweetStream.stop();
+
+	currentKeyword = keyword;
+	io.sockets.emit('switched_keyword', keyword);
 
 	tweetStream = twit.stream('statuses/filter', { track: keyword });
 	tweetStream.on('tweet', function (tweet) {
@@ -38,5 +45,7 @@ module.exports.run = function(keyword, io) {
 	tweetStream.on('reconnect', function (request, response, connectInterval) {
 	  console.log('Reconnected to Twitter streaming API');
 	});
+
+	return keyword;
 }
 
