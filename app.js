@@ -24,13 +24,14 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', function(req, res) {
-  app.locals.currentKeyword = twitter.currentKeyword;
+  req.currentKeyword = twitter.currentKeyword();
   routes.index(req, res);
 });
 
 // When an act of war is sent.
 app.post('/', function(req, res) {
   twitter.run(req.body.keyword, io);
+  req.currentKeyword = twitter.currentKeyword();
   routes.index(req, res);
 });
 

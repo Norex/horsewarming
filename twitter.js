@@ -13,16 +13,18 @@ var twit = new Twit({
 });
 
 var tweetStream = false,
-		currentKeyword = false;
+		currentlySelectedKeyword = false;
 
 
-module.exports.currentKeyword = currentKeyword;
+module.exports.currentKeyword = function() {
+	return currentlySelectedKeyword;
+}
 
 module.exports.run = function(keyword, io) {
 	if (tweetStream)
 		tweetStream.stop();
 
-	currentKeyword = keyword;
+	currentlySelectedKeyword = keyword;
 	io.sockets.emit('switched_keyword', keyword);
 
 	tweetStream = twit.stream('statuses/filter', { track: keyword });
