@@ -7,11 +7,14 @@
       return false;
     });
 
-    var socket = io.connect(window.location.hostname);
-    var keyword = '';
+    var socket = io.connect(window.location.hostname),
+        keyword = '',
+        tweets = [];
+
     socket.on('twitter', function(data) {
       processTweet(data);
     });
+
     socket.on('switched_keyword', function(data) {
       keyword = data;
       $('#alert-box').html('<h4>Now Streaming: ' + keyword);
@@ -19,8 +22,8 @@
     });
 
     var processTweet = function(data) {
-      picTwitter = scrapePicTwitter(data);
-      $('#tweets').prepend('<div class="row"><div class="span12"><blockquote class="tweet">' + picTwitter + '<img class="profile" src="' + data.user.profile_image_url + '"/><p>' + data.text.replace(new RegExp('(^|\\b)(' + keyword + ')(\\b|$)','ig'), '$1<strong>$2</strong>$3') + '</p><small>' + data.user.screen_name + '</small></p></blockquote></div></div>');
+       $('#tweets').prepend('<div class="row"><div class="span12"><blockquote class="tweet">' + scrapePicTwitter(data) + '<img class="profile" src="' + data.user.profile_image_url + '"/><p>' + data.text.replace(new RegExp('(^|\\b)(' + keyword + ')(\\b|$)','ig'), '$1<strong>$2</strong>$3') + '</p><small>' + data.user.screen_name + '</small></p></blockquote></div></div>');
+      $('#tweets > div').slice(50).remove();
     }
 
     var scrapePicTwitter = function(data) {
