@@ -10,18 +10,6 @@ html
     script(type='text/javascript', src='/javascripts/socket.io.js')
     script(type='text/javascript', src='/javascripts/bootstrap.js')
     script(type='text/javascript', src='/javascripts/script.js')
-    script(type='text/javascript')
-      (function($) {
-        $(document).ready(function() {
-          var socket = io.connect('!{socketUrl}');
-          socket.on('twitter', function(data) {
-            processTweet(data);
-          });
-          socket.on('switched_keyword', function(data) {
-            $('#alert-box').html('<h4>Now Streaming: ' + data);
-            $('#alert-box').toggleClass("alert-info").toggleClass("alert-success");
-          });
-        });
-      })(jQuery);
+    
   body
     block content
