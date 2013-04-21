@@ -1,9 +1,9 @@
-var express = require('express')
-  , routes = require('./routes')
-  , http = require('http')
-  , path = require('path')
-  , twitter = require('./twitter')
-  , socketIo = require('socket.io');
+var express = require('express'), 
+    routes = require('./routes'), 
+    http = require('http'), 
+    path = require('path'), 
+    twitter = require('./twitter'), 
+    socketIo = require('socket.io');
 
 var app = express();
 
@@ -23,15 +23,11 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-app.get('/', function(req, res) {
-  req.currentKeyword = twitter.currentKeyword();
-  routes.index(req, res);
-});
+app.get('/', routes.index);
 
 // When an act of war is sent.
 app.post('/', function(req, res) {
   twitter.run(req.body.keyword, io);
-  req.currentKeyword = twitter.currentKeyword();
   routes.index(req, res);
 });
 

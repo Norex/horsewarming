@@ -1,7 +1,7 @@
 {
   "name": "twitter-wars",
   "subdomain": "twitter-wars",
-  "version": "0.0.1-7",
+  "version": "0.0.1-9",
   "scripts": {
     "start": "node app.js"
   },
