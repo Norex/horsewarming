@@ -1,7 +1,7 @@
 {
-  "name": "twitter-wars",
-  "subdomain": "twitter-wars",
-  "version": "0.0.1-9",
+  "name": "horsewarming",
+  "subdomain": "horsewarming",
+  "version": "0.0.1",
   "scripts": {
     "start": "node app.js"
   },
@@ -13,6 +13,7 @@
     "jade": "0.29.x",
     "twit": "1.1.x",
     "nconf": "0.6.x",
+    "instagram-node-lib": "0.1.x",
     "socket.io": "0.9.x"
   }
 }

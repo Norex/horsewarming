@@ -1,8 +1,9 @@
-var express = require('express'), 
-    routes = require('./routes'), 
-    http = require('http'), 
-    path = require('path'), 
-    twitter = require('./twitter'), 
+var express = require('express'),
+    routes = require('./routes'),
+    http = require('http'),
+    path = require('path'),
+    twitter = require('./twitter'),
+    instagram = require('./instagram'),
     socketIo = require('socket.io');
 
 var app = express();
@@ -24,15 +25,15 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', routes.index);
-
-// When an act of war is sent.
-app.post('/', function(req, res) {
-  twitter.run(req.body.keyword, io);
-  routes.index(req, res);
+app.get('/subscribe', function(request, response){
+  instagram.subsribe(request, response);
 });
 
 var server = http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
 
+
 var io = socketIo.listen(server);
+//twitter.run('cat', io);
+instagram.run('cat', io);
