@@ -33,8 +33,8 @@ app.get('/subscribe', function(req, res) {
 });
 
 app.post('/subscribe', function(req, res) {
-  io.sockets.emit('instagram_images', 'nahhhh2');
-  io.sockets.emit('instagram_images', req);
+  io.sockets.emit('instagram_images', 'nahhhh3');
+  // io.sockets.emit('instagram_images', req);
   res.writeHead(200);
   res.end();
 });
