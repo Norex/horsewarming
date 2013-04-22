@@ -1,7 +1,7 @@
 {
   "name": "horsewarming",
   "subdomain": "horsewarming",
-  "version": "0.0.2-1",
+  "version": "0.0.2-2",
   "scripts": {
     "start": "node app.js"
   },
@@ -13,7 +13,6 @@
     "jade": "0.29.x",
     "twit": "1.1.x",
     "nconf": "0.6.x",
-    "instagram-node-lib": "0.1.x",
     "socket.io": "0.9.x"
   }
 }
