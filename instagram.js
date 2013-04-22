@@ -14,7 +14,7 @@ var instagramStream = false,
     currentlySelectedKeyword = false;
 
 module.exports.run = function(keyword, io) {
-  Instagram.subscriptions.subscribe({ object: 'tag', object_id: 'cat' });
+  Instagram.subscriptions.subscribe({ object: 'tag', object_id: 'awesometestlamp' });
   io.sockets.emit('instagram_images', Instagram.subscriptions.list());
   //io.sockets.emit('instagram_images', things);
 

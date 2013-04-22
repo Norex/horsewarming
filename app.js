@@ -35,8 +35,12 @@ var server = http.createServer(app).listen(app.get('port'), function(){
 
 
 var io = socketIo.listen(server);
-app.get('/subscribe', function(request, response){
+app.get('/subscribe', function(request, response) {
   instagram.subscribe(io, request, response);
+});
+
+app.post('/subscribe', function(request, response) {
+  io.sockets.emit('instagram_images', 'nahhhh');
 });
 //twitter.run('cat', io);
 instagram.run('cat', io);
