@@ -28,6 +28,15 @@ app.get('/', routes.index);
 // app.get('/subscribe', function(request, response){
 //   instagram.subscribe(io, request, response);
 // });
+app.get('/subscribe', function(req, res) {
+  instagram.subscribe(io, req, res);
+});
+
+app.post('/subscribe', function(req, res) {
+  io.sockets.emit('instagram_images', 'nahhhh');
+  res.writeHead(200);
+  res.end();
+});
 
 var server = http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
@@ -35,12 +44,6 @@ var server = http.createServer(app).listen(app.get('port'), function(){
 
 
 var io = socketIo.listen(server);
-app.get('/subscribe', function(request, response) {
-  instagram.subscribe(io, request, response);
-});
 
-app.post('/subscribe', function(request, response) {
-  io.sockets.emit('instagram_images', 'nahhhh');
-});
 //twitter.run('cat', io);
 instagram.run('cat', io);

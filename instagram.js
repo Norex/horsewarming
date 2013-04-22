@@ -49,7 +49,6 @@ module.exports.run = function(keyword, io) {
 };
 
 module.exports.subscribe = function(io, req, res) {
-  io.sockets.emit('instagram_images', 'weee');
   Instagram.subscriptions.handshake(req, res); 
 };
 
