@@ -18,7 +18,7 @@ var tweetStream = false,
 
 module.exports.currentKeyword = function() {
   return currentlySelectedKeyword;
-}
+};
 
 module.exports.run = function(keyword, io) {
   if (tweetStream)
@@ -49,5 +49,5 @@ module.exports.run = function(keyword, io) {
   });
 
   return keyword;
-}
+};
 

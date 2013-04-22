@@ -8,31 +8,17 @@
     });
 
     var socket = io.connect(window.location.hostname),
-        keyword = '',
+        keyword = window.currentKeyword,
         tweets = [];
-
     socket.on('twitter', function(data) {
       processTweet(data);
-    });
-
-    socket.on('switched_keyword', function(data) {
-      keyword = data;
-      $('#alert-box').html('<h4>Now Streaming: ' + keyword);
-      $('#alert-box').toggleClass("alert-info").toggleClass("alert-success");
-    });
-
-    socket.on('instagram_images', function(data) {
-      console.log(data);
-      // keyword = data;
-      // $('#alert-box').html('<h4>Now Streaming: ' + keyword);
-      // $('#alert-box').toggleClass("alert-info").toggleClass("alert-success");
     });
 
     var processTweet = function(data) {
       picTwitter = scrapePicTwitter(data);
       twitpic = scrapeTwitPic(data);
       instagram = scrapeInstagram(data);
-      $('#tweets').prepend('<div class="row"><div class="span12"><blockquote class="tweet">' + picTwitter + twitpic + instagram +'<img class="profile" src="' + data.user.profile_image_url + '"/><p>' + data.text.replace(new RegExp('(^|\\b)(' + keyword + ')(\\b|$)','ig'), '$1<strong>$2</strong>$3') + '</p><small>' + data.user.screen_name + '</small></p></blockquote></div></div>');
+      $('#tweets').prepend('<div class="row"><div class="span12"><blockquote class="tweet">' + picTwitter + twitpic + instagram +'<img class="profile" src="' + data.user.profile_image_url + '"/><p>' + data.text.replace(new RegExp('(^|[^\\w\\d#])(' + keyword + ')(\\b|$)','ig'), '$1<strong>$2</strong>$3') + '</p><small>' + data.user.screen_name + '</small></p></blockquote></div></div>');
       $('#tweets > div').slice(50).remove();
     };
 

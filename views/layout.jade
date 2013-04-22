@@ -1,7 +1,7 @@
 doctype 5
 html
   head
-    title Twitter Wars!
+    title Horsewarming!
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
     link(rel='stylesheet', href='/stylesheets/bootstrap.css')
     link(rel='stylesheet', href='/stylesheets/bootstrap-responsive.css')
@@ -10,6 +10,7 @@ html
     script(type='text/javascript', src='/javascripts/socket.io.js')
     script(type='text/javascript', src='/javascripts/bootstrap.js')
     script(type='text/javascript', src='/javascripts/script.js')
-    
+    script(type='text/javascript')
+      window.currentKeyword = '!{currentKeyword}';
   body
     block content
