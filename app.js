@@ -25,9 +25,9 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', routes.index);
-app.get('/subscribe', function(request, response){
-  instagram.subscribe(request, response);
-});
+// app.get('/subscribe', function(request, response){
+//   instagram.subscribe(io, request, response);
+// });
 
 var server = http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
@@ -35,5 +35,8 @@ var server = http.createServer(app).listen(app.get('port'), function(){
 
 
 var io = socketIo.listen(server);
+app.get('/subscribe', function(request, response){
+  instagram.subscribe(io, request, response);
+});
 //twitter.run('cat', io);
 instagram.run('cat', io);
