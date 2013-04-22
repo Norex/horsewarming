@@ -15,7 +15,7 @@ var instagramStream = false,
 
 module.exports.run = function(keyword, io) {
   Instagram.subscriptions.subscribe({ object: 'tag', object_id: 'blue' });
-  Instagram.subscriptions.list();
+  io.sockets.emit('instagram_images', Instagram.subscriptions.list());
   //io.sockets.emit('instagram_images', things);
 
   // if (tweetStream)
@@ -49,11 +49,6 @@ module.exports.run = function(keyword, io) {
 };
 
 module.exports.subscribe = function(req, res) {
-  res.writeHead(200);
-  res.write('in subscriped');
-  console.log('in subscribed');
   Instagram.subscriptions.handshake(req, res); 
-  console.log('finished subscribed');
-  res.end('finished subscribed');
 };
 
