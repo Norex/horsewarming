@@ -26,7 +26,7 @@
       var output = '';
       try{
         for(var i=0; i<data.entities.media.length; i++) {
-          output += formatPhoto(data.entities.media[i].media_url + ':small', 'pic-twitter');
+          output += formatPhoto(data.entities.media[i].media_url + ':large', 'pic-twitter');
         }
       }
       catch(e){ }
@@ -40,7 +40,7 @@
         for(var i=0; i<data.entities.urls.length; i++){
           if(/twitpic\.com\//.test(data.entities.urls[i].display_url)){
             var pic = data.entities.urls[i].display_url.replace(/^twitpic\.com\/([a-zA-Z0-9]+)\/*.*/, "$1");
-            output += formatPhoto('http://twitpic.com/show/thumb/' + pic, 'pic-twitpic');
+            output += formatPhoto('http://twitpic.com/show/medium/' + pic, 'pic-twitpic');
           }
         }
       }
@@ -56,7 +56,7 @@
         for(var i=0; i<data.entities.urls.length; i++){
           if(/instagram\.com\//.test(data.entities.urls[i].display_url)){
             var pic = data.entities.urls[i].display_url.replace(/^instagram\.com\/p\/([a-zA-Z0-9]+)\/*.*/, "$1");
-            output += formatPhoto('http://instagram.com/p/' + pic + '/media?size=t', 'pic-instagram');
+            output += formatPhoto('http://instagram.com/p/' + pic + '/media?size=l', 'pic-instagram');
           }
         }
       }
