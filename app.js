@@ -30,4 +30,4 @@ var server = http.createServer(app).listen(app.get('port'), function(){
 });
 
 var io = socketIo.listen(server);
-twitter.run('#cat', io);
+twitter.run('cat', io);
