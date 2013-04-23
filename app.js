@@ -1,3 +1,6 @@
+var nconf = require('nconf');
+nconf.argv().env().file({ file: './config.json' });
+
 var express = require('express'),
     routes = require('./routes'),
     http = require('http'),
@@ -30,4 +33,4 @@ var server = http.createServer(app).listen(app.get('port'), function(){
 });
 
 var io = socketIo.listen(server);
-twitter.run('#dog', io);
+twitter.run(nconf.get('KEYWORD'), io);

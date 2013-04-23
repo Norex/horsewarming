@@ -1,10 +1,6 @@
 var Twit = require('twit'),
     nconf = require('nconf');
 
-nconf.argv()
-     .env()
-     .file({ file: './config.json' });
-
 var twit = new Twit({
     consumer_key: nconf.get('TWITTER_CONSUMER_KEY'),
     consumer_secret: nconf.get('TWITTER_CONSUMER_SECRET'),
@@ -14,7 +10,6 @@ var twit = new Twit({
 
 var tweetStream = false,
     currentlySelectedKeyword = false;
-
 
 module.exports.currentKeyword = function() {
   return currentlySelectedKeyword;
