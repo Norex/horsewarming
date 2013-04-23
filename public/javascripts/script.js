@@ -18,7 +18,13 @@
       picTwitter = scrapePicTwitter(data);
       twitpic = scrapeTwitPic(data);
       instagram = scrapeInstagram(data);
-      $('#tweets').prepend('<div class="row"><div class="span12"><blockquote class="tweet">' + picTwitter + twitpic + instagram +'<img class="profile" src="' + data.user.profile_image_url + '"/><p>' + data.text.replace(new RegExp('(^|[^\\w\\d#])(' + keyword + ')(\\b|$)','ig'), '$1<strong>$2</strong>$3') + '</p><small>' + data.user.screen_name + '</small></p></blockquote></div></div>');
+      var new_picture = $('<div class="row"><div class="span12"><blockquote class="tweet">' + picTwitter + twitpic + instagram +'<img class="profile" src="' + data.user.profile_image_url + '"/><p>' + data.text.replace(new RegExp('(^|[^\\w\\d#])(' + keyword + ')(\\b|$)','ig'), '$1<strong>$2</strong>$3') + '</p><small>' + data.user.screen_name + '</small></p></blockquote></div></div>');
+
+      new_picture.find('img.picture').error(function () {
+        $(this).hide();
+      });
+
+      $('#tweets').prepend(new_picture);
       $('#tweets > div').slice(50).remove();
     };
 
@@ -50,7 +56,6 @@
     };
 
     var scrapeInstagram = function(data){
-      console.log(data);
       var output = '';
       try{
         for(var i=0; i<data.entities.urls.length; i++){

@@ -40,6 +40,7 @@ h1, h2, h3, h4, h5, h6 {
 
 body {
   background: transparent url('/images/bg.jpg');
+
   padding: 0 !important;
   margin: 0 !important;
 }
@@ -95,12 +96,16 @@ body {
 }
 
 .header-image {
-  margin: 0 auto 15px auto !important;
+  margin: -25px auto 15px auto !important;
   color: #fff !important;
   background: transparent url('/images/header.png') no-repeat center top;
   width: 342px;
-  height: 107px;
-  line-height: 66px !important;
+  height: 130px;
+  line-height: 100px !important;
   font-family: 'deming_epregular';
   font-size: 26px !important;
+}
+
+img.picture {
+  max-height: 400px !important;
 }
